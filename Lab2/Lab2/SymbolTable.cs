@@ -1,92 +1,109 @@
-namespace Lab2;
+    using System.Text;
 
-public class SymbolTable
-{
-    private int _size;
-    private HashTable<string> _identifiersHashTable;
-    private HashTable<int> _intConstantsHashTable;
-    private HashTable<string> _stringConstantsHashTable;
+    namespace Lab2;
 
-    public SymbolTable(int size)
+    public class SymbolTable
     {
-        _size = size;
-        _identifiersHashTable = new HashTable<string>(_size);
-        _intConstantsHashTable = new HashTable<int>(_size);
-        _stringConstantsHashTable = new HashTable<string>(_size);
-    }
+        private int _size;
+        private HashTable<string> _identifiersHashTable;
+        private HashTable<int> _intConstantsHashTable;
+        private HashTable<string> _stringConstantsHashTable;
 
-    public KeyValuePair<int, int> AddIdentifier(string name)
-    {
-        try
+        public SymbolTable(int size)
         {
-            return _identifiersHashTable.Add(name);
+            _size = size;
+            _identifiersHashTable = new HashTable<string>(_size);
+            _intConstantsHashTable = new HashTable<int>(_size);
+            _stringConstantsHashTable = new HashTable<string>(_size);
         }
-        catch (Exception e)
+
+        public KeyValuePair<int, int> AddIdentifier(string name)
         {
-            throw new Exception($"Failed to add identifier: {e.Message}");
+            try
+            {
+                return _identifiersHashTable.Add(name);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Failed to add identifier: {e.Message}");
+            }
         }
-    }
-    
-    public KeyValuePair<int, int> AddIntConstant(int constant)
-    {
-        try
+        
+        public KeyValuePair<int, int> AddIntConstant(int constant)
         {
-            return _intConstantsHashTable.Add(constant);
+            try
+            {
+                return _intConstantsHashTable.Add(constant);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Failed to add int constant: {e.Message}");
+            }
         }
-        catch (Exception e)
+        
+        public KeyValuePair<int, int> AddStringConstant(string constant)
         {
-            throw new Exception($"Failed to add int constant: {e.Message}");
+            try
+            {
+                return _stringConstantsHashTable.Add(constant);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Failed to add string constant: {e.Message}");
+            }
         }
-    }
-    
-    public KeyValuePair<int, int> AddStringConstant(string constant)
-    {
-        try
+
+        public bool HasIdentifier(string name)
         {
-            return _stringConstantsHashTable.Add(constant);
+            return _identifiersHashTable.Contains(name);
         }
-        catch (Exception e)
+
+        public bool HasIntConstant(int constant)
         {
-            throw new Exception($"Failed to add string constant: {e.Message}");
+            return _intConstantsHashTable.Contains(constant);
         }
-    }
 
-    public bool HasIdentifier(string name)
-    {
-        return _identifiersHashTable.Contains(name);
-    }
+        public bool HasStringConstant(string constant)
+        {
+            return _stringConstantsHashTable.Contains(constant);
+        }
 
-    public bool HasIntConstant(int constant)
-    {
-        return _intConstantsHashTable.Contains(constant);
-    }
+        public KeyValuePair<int, int> GetIdentifierPosition(string name)
+        {
+            return _identifiersHashTable.GetPosition(name);
+        }
 
-    public bool HasStringConstant(string constant)
-    {
-        return _stringConstantsHashTable.Contains(constant);
-    }
+        public KeyValuePair<int, int> GetIntConstantPosition(int constant)
+        {
+            return _intConstantsHashTable.GetPosition(constant);
+        }
 
-    public KeyValuePair<int, int> GetIdentifierPosition(string name)
-    {
-        return _identifiersHashTable.GetPosition(name);
-    }
+        public KeyValuePair<int, int> GetStringConstantPosition(string constant)
+        {
+            return _stringConstantsHashTable.GetPosition(constant);
+        }
 
-    public KeyValuePair<int, int> GetIntConstantPosition(int constant)
-    {
-        return _intConstantsHashTable.GetPosition(constant);
-    }
+        public override string ToString()
+        {
+            var sb = new StringBuilder("SymbolTable\n{");
 
-    public KeyValuePair<int, int> GetStringConstantPosition(string constant)
-    {
-        return _stringConstantsHashTable.GetPosition(constant);
-    }
+            if (_identifiersHashTable.Any())
+            {
+                sb.Append("\n\tidentifiersHashTable = " + _identifiersHashTable);
+            }
 
-    public override string ToString()
-    {
-        return "SymbolTable\n{ \n" +
-               "\tidentifiersHashTable = " + _identifiersHashTable + "\n" +
-               "\tintConstantsHashTable = " + _intConstantsHashTable + "\n" +
-               "\tstringConstantsHashTable = " + _stringConstantsHashTable + "\n" +
-               "}";
+            if (_intConstantsHashTable.Any())
+            {
+                sb.Append("\n\tintConstantsHashTable = " + _intConstantsHashTable);
+            }
+
+            if (_stringConstantsHashTable.Any())
+            {
+                sb.Append("\n\tstringConstantsHashTable = " + _stringConstantsHashTable);
+            }
+
+            sb.Append("\n}");
+            return sb.ToString();
+        }
+
     }
-}

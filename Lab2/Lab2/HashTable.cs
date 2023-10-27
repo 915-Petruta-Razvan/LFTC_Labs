@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Lab2;
 
 public class HashTable<T>
@@ -46,11 +48,40 @@ public class HashTable<T>
 
         return new KeyValuePair<int, int>(-1, -1);
     }
+
+    public bool Any()
+    {
+        foreach (var item in _items)
+        {
+            if (item.Count > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     
     public override string ToString()
     {
-        var itemStrings = _items.Select(list => "[" + string.Join(",", list) + "]");
-        return $"HashTable {{items = {string.Join(",", itemStrings)}}}";
+        var sb = new StringBuilder("HashTable {\n");
+
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i].Count > 0)
+            {
+                sb.Append($"\tIndex {i}:\n");
+
+                foreach (T item in _items[i])
+                {
+                    int position = _items[i].IndexOf(item);
+                    sb.Append($"\t\tPosition {position}: {item}\n");
+                }
+            }
+        }
+
+        sb.Append("\t}");
+        return sb.ToString();
     }
 
     private int Hash(int key)
