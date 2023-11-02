@@ -49,6 +49,7 @@ public class Scanner
 
             using (StreamWriter symbolTableWriter = new StreamWriter($"Output/ST{filename}"))
             {
+                symbolTableWriter.WriteLine("The symbol table has a 3 hash tables: identifiers, int constants and string constants");
                 symbolTableWriter.WriteLine("Identifiers Symbol Table:");
                 symbolTableWriter.Write(_identifiersSymbolTable);
                 symbolTableWriter.WriteLine("\nConstants Symbol Table:");
@@ -114,6 +115,11 @@ public class Scanner
         {
             return;
         }
+        
+        if (CheckIntConstant())
+        {
+            return;
+        }
 
         if (CheckTokens())
         {
@@ -121,11 +127,6 @@ public class Scanner
         }
         
         if (CheckIdentifiers())
-        {
-            return;
-        }
-        
-        if (CheckIntConstant())
         {
             return;
         }
@@ -153,9 +154,11 @@ public class Scanner
         
         foreach (var reservedWord in _reservedWords)
         {
+            // use starts with in case there is no space after the token
             if (possibleToken.StartsWith(reservedWord))
             {
                 int endIndex = _index + reservedWord.Length;
+                // check if it might be an identifier starting with a keyword
                 if (endIndex < _program.Length &&
                     (char.IsLetterOrDigit(_program[endIndex]) || _program[endIndex] == '_'))
                 {
@@ -170,6 +173,7 @@ public class Scanner
             }
         }
 
+        // use starts with in case there is no space after the token
         foreach (var token in _otherTokens)
         {
             if (possibleToken.StartsWith(token))

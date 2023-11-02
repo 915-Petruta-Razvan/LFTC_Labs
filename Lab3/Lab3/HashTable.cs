@@ -68,15 +68,10 @@ public class HashTable<T>
 
         for (int i = 0; i < _items.Count; i++)
         {
-            if (_items[i].Count > 0)
+            for (int j = 0; j < _items[i].Count; j++)
             {
-                sb.Append($"\tIndex {i}:\n");
-
-                foreach (T item in _items[i])
-                {
-                    int position = _items[i].IndexOf(item);
-                    sb.Append($"\t\tPosition {position}: {item}\n");
-                }
+                T item = _items[i][j];
+                sb.Append($"\t\t{item} -> ({i}, {j})\n");
             }
         }
 
@@ -86,7 +81,11 @@ public class HashTable<T>
 
     private int Hash(int key)
     {
-        return key % Size;
+        int result = key % Size;
+        if (result < 0) {
+            result += Size;
+        }
+        return result;
     }
 
     private int Hash(string key)

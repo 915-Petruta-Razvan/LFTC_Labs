@@ -9,5 +9,6 @@ class Program
         scanner.Scan("Resources/p2.txt");
         scanner.Scan("Resources/p3.txt");
         scanner.Scan("Resources/p1err.txt");
+        scanner.Scan("Resources/testing.txt");
     }
 }

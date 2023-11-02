@@ -1,33 +1,25 @@
+The symbol table has a 3 hash tables: identifiers, int constants and string constants
 Identifiers Symbol Table:
 SymbolTable
 {
 	identifiersHashTable = HashTable {
-	Index 0:
-		Position 0: n
-	Index 1:
-		Position 0: d
-	Index 3:
-		Position 0: isPrime
+		n -> (0, 0)
+		d -> (1, 0)
+		isPrime -> (3, 0)
 	}
 }
 Constants Symbol Table:
 SymbolTable
 {
 	intConstantsHashTable = HashTable {
-	Index 0:
-		Position 0: 0
-	Index 1:
-		Position 0: 1
-	Index 2:
-		Position 0: 2
+		0 -> (0, 0)
+		1 -> (1, 0)
+		2 -> (2, 0)
 	}
 	stringConstantsHashTable = HashTable {
-	Index 3:
-		Position 0: "no"
-	Index 4:
-		Position 0: " is not a prime number"
-	Index 9:
-		Position 0: "yes"
-		Position 1: " is a prime number"
+		"no" -> (3, 0)
+		" is not a prime number" -> (4, 0)
+		"yes" -> (9, 0)
+		" is a prime number" -> (9, 1)
 	}
 }
