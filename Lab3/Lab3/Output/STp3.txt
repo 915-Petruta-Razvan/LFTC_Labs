@@ -1,0 +1,26 @@
+Identifiers Symbol Table:
+SymbolTable
+{
+	identifiersHashTable = HashTable {
+	Index 0:
+		Position 0: n
+		Position 1: sum
+	Index 5:
+		Position 0: numbers
+	Index 6:
+		Position 0: i
+	Index 10:
+		Position 0: x
+	}
+}
+Constants Symbol Table:
+SymbolTable
+{
+	intConstantsHashTable = HashTable {
+	Index 0:
+		Position 0: 0
+	Index 1:
+		Position 0: 100
+		Position 1: 1
+	}
+}

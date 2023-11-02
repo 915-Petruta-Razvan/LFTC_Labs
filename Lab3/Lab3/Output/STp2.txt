@@ -1,0 +1,33 @@
+Identifiers Symbol Table:
+SymbolTable
+{
+	identifiersHashTable = HashTable {
+	Index 0:
+		Position 0: n
+	Index 1:
+		Position 0: d
+	Index 3:
+		Position 0: isPrime
+	}
+}
+Constants Symbol Table:
+SymbolTable
+{
+	intConstantsHashTable = HashTable {
+	Index 0:
+		Position 0: 0
+	Index 1:
+		Position 0: 1
+	Index 2:
+		Position 0: 2
+	}
+	stringConstantsHashTable = HashTable {
+	Index 3:
+		Position 0: "no"
+	Index 4:
+		Position 0: " is not a prime number"
+	Index 9:
+		Position 0: "yes"
+		Position 1: " is a prime number"
+	}
+}

@@ -1,0 +1,24 @@
+Identifiers Symbol Table:
+SymbolTable
+{
+	identifiersHashTable = HashTable {
+	Index 0:
+		Position 0: smallest
+	Index 5:
+		Position 0: n1
+	Index 6:
+		Position 0: n2
+	Index 7:
+		Position 0: n3
+	Index 10:
+		Position 0: if_write
+	}
+}
+Constants Symbol Table:
+SymbolTable
+{
+	stringConstantsHashTable = HashTable {
+	Index 2:
+		Position 0: "ana are 123 mere"
+	}
+}
