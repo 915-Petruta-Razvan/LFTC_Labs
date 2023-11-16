@@ -69,6 +69,11 @@ public class FiniteAutomaton
 
     public bool IsWordValid(string word)
     {
+        if (!IsDeterministicFiniteAutomaton())
+        {
+            throw new Exception("Not a deterministic finite automaton");
+        }
+        
         List<string> tokens = word.Select(c => c.ToString()).ToList();
         string currentState = InitialState;
         foreach (string token in tokens)
@@ -154,5 +159,29 @@ public class FiniteAutomaton
         string rightHandSide = line.Substring(line.IndexOf("=") + 1);
         
         return rightHandSide.Substring(1, rightHandSide.Length - 2);
+    }
+
+    private bool IsDeterministicFiniteAutomaton()
+    {
+        if (States.Count == 0 || Alphabet.Count == 0 || FinalStates.Count == 0 || 
+            !States.Contains(InitialState) || 
+            !FinalStates.All(finalState => States.Contains(finalState)))
+        {
+            return false;
+        }
+
+        HashSet<string> visitedTransitions = new HashSet<string>();
+        foreach (Transition transition in Transitions)
+        {
+            string key = $"{transition.FromState}{transition.Symbol}";
+            if (visitedTransitions.Contains(key))
+            {
+                return false;
+            }
+
+            visitedTransitions.Add(key);
+        }
+
+        return true;
     }
 }

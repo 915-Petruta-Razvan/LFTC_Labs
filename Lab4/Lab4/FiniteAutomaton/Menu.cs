@@ -16,43 +16,50 @@ public class Menu
 
         while (true)
         {
-            Console.Write("> ");
-            int option = int.Parse(Console.ReadLine());
-
-            switch (option)
+            try
             {
-                case 0:
-                    return;
-                
-                case 1:
-                    finiteAutomaton.PrintStates();
-                    break;
-                
-                case 2:
-                    finiteAutomaton.PrintAlphabet();
-                    break;
-                
-                case 3:
-                    finiteAutomaton.PrintTransitions();
-                    break;
-                
-                case 4:
-                    finiteAutomaton.PrintInitialState();
-                    break;
-                
-                case 5:
-                    finiteAutomaton.PrintFinalStates();
-                    break;
-                
-                case 6:
-                    Console.Write("Enter word: ");
-                    var word = Console.ReadLine();
-                    Console.WriteLine(finiteAutomaton.IsWordValid(word));
-                    break;
-                
-                default:
-                    Console.WriteLine("Invalid option");
-                    break;
+                Console.Write("> ");
+                int option = int.Parse(Console.ReadLine());
+
+                switch (option)
+                {
+                    case 0:
+                        return;
+
+                    case 1:
+                        finiteAutomaton.PrintStates();
+                        break;
+
+                    case 2:
+                        finiteAutomaton.PrintAlphabet();
+                        break;
+
+                    case 3:
+                        finiteAutomaton.PrintTransitions();
+                        break;
+
+                    case 4:
+                        finiteAutomaton.PrintInitialState();
+                        break;
+
+                    case 5:
+                        finiteAutomaton.PrintFinalStates();
+                        break;
+
+                    case 6:
+                        Console.Write("Enter word: ");
+                        var word = Console.ReadLine();
+                        Console.WriteLine(finiteAutomaton.IsWordValid(word));
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid option");
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }
