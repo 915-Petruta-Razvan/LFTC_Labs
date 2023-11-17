@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Lab4;
@@ -97,6 +98,42 @@ public class FiniteAutomaton
 
         return FinalStates.Contains(currentState);
     }
+    
+    public string? GetTokenFromFA(string word)
+    {
+        var currentState = InitialState;
+        StringBuilder match = new StringBuilder();
+
+        foreach (char c in word)
+        {
+            string? newState = null;
+
+            foreach (Transition transition in Transitions)
+            {
+                if (transition.FromState == currentState && transition.Symbol == c.ToString())
+                {
+                    newState = transition.ToState;
+                    match.Append(c);
+                    break;
+                }
+            }
+
+            if (newState == null)
+            {
+                if (!FinalStates.Contains(currentState))
+                {
+                    return null;
+                }
+                
+                return match.ToString();
+            }
+
+            currentState = newState;
+        }
+
+        return match.ToString();
+    }
+
 
     private void PrintListOfStrings(string name, List<string> list)
     {
