@@ -20,15 +20,7 @@ public class FiniteAutomaton
         Transitions = new List<Transition>();
         InitialState = "";
         FinalStates = new List<string>();
-
-        try
-        {
-            InitFromFile();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        InitFromFile();
     }
 
     public void PrintStates()
@@ -186,7 +178,8 @@ public class FiniteAutomaton
                     break;
                 
                 default:
-                    throw new Exception($"Unrecognized line: {line}");
+                    Console.WriteLine("Unexpected line");
+                    break;
             }
         }
     }
@@ -200,13 +193,6 @@ public class FiniteAutomaton
 
     private bool IsDeterministicFiniteAutomaton()
     {
-        if (States.Count == 0 || Alphabet.Count == 0 || FinalStates.Count == 0 || 
-            !States.Contains(InitialState) || 
-            !FinalStates.All(finalState => States.Contains(finalState)))
-        {
-            return false;
-        }
-
         HashSet<string> visitedTransitions = new HashSet<string>();
         foreach (Transition transition in Transitions)
         {
